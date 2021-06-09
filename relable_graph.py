@@ -2,7 +2,7 @@ import csv
 import argparse
 
 
-def relabel_graph(infilename, outfilename, mapfilename)
+def relabel_graph(infilename, outfilename, mapfilename):
   idx_map = {};
   idx = 0;
   with open(infilename, 'r') as csv_file:
