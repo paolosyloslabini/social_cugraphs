@@ -14,7 +14,7 @@ def relabel_graph(infilename, outfilename, mapfilename):
   with open(infilename, 'r') as csv_file:
     with open(outfilename, 'w') as out_csv_file:
       writer = csv.writer(out_csv_file)
-      reader = csv.reader(out_csv_file)
+      reader = csv.reader(csv_file)
       writer.writerow(["src","dst"]);
       for row in reader:
         writer.writerow([ idx_map[row[0]], idx_map[row[1]] ])
