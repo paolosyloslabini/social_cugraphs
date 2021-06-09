@@ -39,9 +39,9 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    input_dir = args.input_dir;
-    output_dir = args.output_dir;
-    info_type = args.info_type;
-    csv_filename = output_dir + info_type + "_results.csv";
-     
-    make_csv(input_dir, info_type, csv_filename);
+    input_file = args.input_file;
+    output_file = args.output_dir;
+    output_map = args.output_map;   
+    
+    relabel_graph(input_file, output_file, output_map)
+    
