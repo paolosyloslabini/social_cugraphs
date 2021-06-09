@@ -26,7 +26,7 @@ def relabel_graph(infilename, outfilename, mapfilename):
     writer = csv.writer(map_csv_file)
     writer.writerow(["nodename","idx"]);
     for key in idx_map:
-      writer.writerow(key, idx_map[key]);
+      writer.writerow([key, idx_map[key]]);
 
 
 if __name__ == "__main__":
