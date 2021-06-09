@@ -11,6 +11,9 @@ def relabel_graph(infilename, outfilename, mapfilename):
       if (row[0] not in idx_map):
         idx_map[row[0]] = idx;
         idx += 1;
+      if (row[1] not in idx_map):
+        idx_map[row[1]] = idx;
+        idx += 1;
   print(idx_map);
   with open(infilename, 'r') as csv_file:
     with open(outfilename, 'w') as out_csv_file:
