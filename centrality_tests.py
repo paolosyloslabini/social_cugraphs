@@ -19,19 +19,19 @@ gdf = cudf.read_csv(, names=["src", "dst"], dtype=["int32", "int32"])
 G = cugraph.Graph()
 G.from_cudf_edgelist(gdf, source='src', destination='dst')
 
-# Let's now get the PageRank score of each vertex by calling cugraph.pagerank
+# Centrality scores
 df_page = cugraph.pagerank(G)
 vertex_bc = cugraph.betweenness_centrality(G)
 edge_bc = cugraph.edge_betweenness_centrality(G)
 
-
+# Communities
 gdf["data"] = 1.0
 G = cugraph.Graph()
 G.from_cudf_edgelist(gdf, source='src', destination='dst', edge_attr='data', renumber=True)
 df_louv, mod_louv = cugraph.louvain(G)
 df_ecg = cugraph.ecg(G)
 
-# Let's look at the PageRank Score (only do this on small graphs)
+# Look at the PageRank Score
 for i in range(5):
 	print("vertex " + str(df_page['vertex'].iloc[i]) +
 		" PageRank is " + str(df_page['pagerank'].iloc[i]))
