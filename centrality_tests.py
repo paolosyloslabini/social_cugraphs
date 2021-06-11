@@ -1,4 +1,5 @@
 import cugraph
+import cudf
 import argparse
 
 
@@ -20,6 +21,8 @@ G.from_cudf_edgelist(gdf, source='src', destination='dst')
 
 # Let's now get the PageRank score of each vertex by calling cugraph.pagerank
 df_page = cugraph.pagerank(G)
+vertex_bc = cugraph.betweenness_centrality(G)
+edge_bc = cugraph.edge_betweenness_centrality(G)
 
 # Let's look at the PageRank Score (only do this on small graphs)
 for i in range(5):
