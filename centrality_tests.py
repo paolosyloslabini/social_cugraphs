@@ -30,8 +30,3 @@ G = cugraph.Graph()
 G.from_cudf_edgelist(gdf, source='src', destination='dst', edge_attr='data', renumber=True)
 df_louv, mod_louv = cugraph.louvain(G)
 df_ecg = cugraph.ecg(G)
-
-# Look at the PageRank Score
-for i in range(5):
-	print("vertex " + str(df_page['vertex'].iloc[i]) +
-		" PageRank is " + str(df_page['pagerank'].iloc[i]))
