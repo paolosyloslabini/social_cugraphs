@@ -10,7 +10,7 @@ if __name__ == "__main__":
 	input_file = args.input_file
 
 # read data into a cuDF DataFrame using read_csv
-gdf = cudf.read_csv(, names=["src", "dst"], dtype=["int32", "int32"])
+gdf = cudf.read_csv(input_file, names=["src", "dst"], dtype=["int32", "int32"])
 
 # We now have data as edge pairs
 # create a Graph using the source (src) and destination (dst) vertex pairs
