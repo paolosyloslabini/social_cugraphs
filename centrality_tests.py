@@ -1,5 +1,5 @@
 import cugraph
-import cudf
+import cudf as cudf
 import argparse
 
 
