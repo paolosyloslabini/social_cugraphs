@@ -10,12 +10,16 @@ if __name__ == "__main__":
 	input_file = args.input_file
 
 # read data into a cuDF DataFrame using read_csv
+print("reading csv")
 gdf = cudf.read_csv(input_file, names=["src", "dst"], dtype=["int32", "int32"])
+print("csv read")
 
 # We now have data as edge pairs
 # create a Graph using the source (src) and destination (dst) vertex pairs
+print("Making graph")
 G = cugraph.Graph()
 G.from_cudf_edgelist(gdf, source='src', destination='dst')
+print("Graph created")
 
 # Centrality scores
 print("evaluating centrality scores")
