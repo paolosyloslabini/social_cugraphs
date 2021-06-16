@@ -18,9 +18,13 @@ G = cugraph.Graph()
 G.from_cudf_edgelist(gdf, source='src', destination='dst')
 
 # Centrality scores
+print("evaluating centrality scores")
 df_page = cugraph.pagerank(G)
+print("pagerank done")
 vertex_bc = cugraph.betweenness_centrality(G)
+print("BC done")
 edge_bc = cugraph.edge_betweenness_centrality(G)
+print("EDGE BC done")
 
 # Communities
 gdf["data"] = 1.0
