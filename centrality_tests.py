@@ -7,7 +7,7 @@ if __name__ == "__main__":
 	parser = argparse.ArgumentParser(description="Collect results for approximate algorithms into a csv")
 	parser.add_argument("--input-file", default="/", help="the input csv of a graph to be analyzed")
 	args = parser.parse_args()
- 	input_file = args.input_file
+	input_file = args.input_file
 
 # read data into a cuDF DataFrame using read_csv
 gdf = cudf.read_csv(, names=["src", "dst"], dtype=["int32", "int32"])
