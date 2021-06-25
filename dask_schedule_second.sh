@@ -14,7 +14,7 @@ CONDA_ROOT=$(conda info --base)
 source $CONDA_ROOT/etc/profile.d/conda.sh
 conda activate rapids-0.19
 
-LOCAL_DIRECTORY=/nfs/dask-local-directory
+LOCAL_DIRECTORY=/home/clusterusers/pasyloslabini/dask-local-directory
 
 dask-cuda-worker \
 	    --rmm-pool-size 1GB \
