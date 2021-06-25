@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
-
-#SBATCH -J dask-cuda-workers
+#SBATCH -J dask-client
 #SBATCH -t 00:10:00
-#SBATCH --job-name=dask_schedule_start
-#SBATCH --mem=10G
+#SBATCH --error=client-%j.err
+#SBATCH --output=client-%j.out
+#SBATCH --partition gpu
+#SBATCH --gres=gpu
+#SBATCH --nodes 1
 
 
 module load cuda-11.0
