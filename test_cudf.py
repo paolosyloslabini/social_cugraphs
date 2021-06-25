@@ -8,4 +8,4 @@ cdf = cudf.datasets.timeseries()
 
 ddf = dd.from_pandas(cdf, npartitions=10)
 res = ddf.groupby(['id', 'name']).agg(['mean', 'sum', 'count']).compute()
-print(res)                                                                                                                                                                                     ~                                                 
+print(res)
