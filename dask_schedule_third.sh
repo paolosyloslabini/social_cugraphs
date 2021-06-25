@@ -10,7 +10,7 @@ module load cuda-11.0
 module load anaconda3
 CONDA_ROOT=$(conda info --base)
 source $CONDA_ROOT/etc/profile.d/conda.sh
-conda activate rapids-0.19
+conda activate rapids-21.06
 LOCAL_DIRECTORY=/home/clusterusers/pasyloslabini/dask-local-directory
 
 
@@ -24,8 +24,6 @@ ddf = dd.from_pandas(cdf, npartitions=10)
 res = ddf.groupby(['id', 'name']).agg(['mean', 'sum', 'count']).compute()
 print(res)
 EOF
-
- 
 
 python3 /home/clusterusers/pasyloslabini/dask-local-directory/dask-cudf-example.py 
 
