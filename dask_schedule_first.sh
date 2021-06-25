@@ -12,6 +12,6 @@ source $CONDA_ROOT/etc/profile.d/conda.sh
 conda activate rapids-0.19
 
 
-LOCAL_DIRECTORY=/nfs/dask-local-directory
+LOCAL_DIRECTORY=/home/clusterusers/pasyloslabini/dask-local-directory
 mkdir $LOCAL_DIRECTORY
 dask-scheduler --protocol tcp --scheduler-file "$LOCAL_DIRECTORY/dask-scheduler.json"
