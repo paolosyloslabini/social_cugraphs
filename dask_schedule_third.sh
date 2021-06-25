@@ -11,10 +11,10 @@ module load anaconda3
 CONDA_ROOT=$(conda info --base)
 source $CONDA_ROOT/etc/profile.d/conda.sh
 conda activate rapids-0.19
-LOCAL_DIRECTORY=/home/clusterusers/pasyloslabini/dask-local-dir
+LOCAL_DIRECTORY=/home/clusterusers/pasyloslabini/dask-local-directory
 
 
-python3 /home/clusterusers/pasyloslabini/dask-local-dir/dask-cudf-example.py
+python3 /home/clusterusers/pasyloslabini/dask-local-directory/dask-cudf-example.py
  
 
 
