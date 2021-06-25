@@ -10,7 +10,7 @@ module load cuda-11.0
 module load anaconda3
 CONDA_ROOT=$(conda info --base)
 source $CONDA_ROOT/etc/profile.d/conda.sh
-conda activate rapids-21.06
+conda activate rapids-0.19
 LOCAL_DIRECTORY=/home/clusterusers/kohofer/slurm/sylos/dask-local-dir
 
 
