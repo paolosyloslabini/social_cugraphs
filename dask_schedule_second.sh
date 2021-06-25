@@ -1,21 +1,18 @@
 #!/usr/bin/env bash
-#SBATCH -J dask-client
+#SBATCH -J dask-cuda-workers
 #SBATCH -t 00:10:00
-#SBATCH --error=client-%j.err
-#SBATCH --output=client-%j.out
+#SBATCH --job-name=dask_schedule_start
+#SBATCH --error=workers-%j.err
+#SBATCH --output=workers-%j.out
 #SBATCH --partition gpu
 #SBATCH --gres=gpu
-#SBATCH --nodes 1
-
-
+#SBATCH --nodes 2
 module load cuda-11.0
 module load anaconda3
 
-
 CONDA_ROOT=$(conda info --base)
 source $CONDA_ROOT/etc/profile.d/conda.sh
-conda activate rapids-0.19
-
+conda activate rapids-21.06
 LOCAL_DIRECTORY=/home/clusterusers/pasyloslabini/dask-local-directory
 
 dask-cuda-worker \
