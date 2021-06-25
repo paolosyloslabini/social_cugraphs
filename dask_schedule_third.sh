@@ -14,8 +14,20 @@ conda activate rapids-0.19
 LOCAL_DIRECTORY=/home/clusterusers/pasyloslabini/dask-local-directory
 
 
-python3 /home/clusterusers/pasyloslabini/dask-local-directory/dask-cudf-example.py
+cat <<EOF >>/home/clusterusers/pasyloslabini/dask-local-directory/dask-cudf-example.py
+import cudf
+import dask.dataframe as dd
+from dask.distributed import Client
+client = Client(scheduler_file="$LOCAL_DIRECTORY/scheduler.json")
+cdf = cudf.datasets.timeseries()
+ddf = dd.from_pandas(cdf, npartitions=10)
+res = ddf.groupby(['id', 'name']).agg(['mean', 'sum', 'count']).compute()
+print(res)
+EOF
+
  
+
+python3 /home/clusterusers/pasyloslabini/dask-local-directory/dask-cudf-example.py 
 
 
 
