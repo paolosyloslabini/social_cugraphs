@@ -9,8 +9,10 @@ client = Client(scheduler_file=schedulerjson)
 if __name__ == "__main__":
 	parser = argparse.ArgumentParser(description="Collect results for approximate algorithms into a csv")
 	parser.add_argument("--input-file", default="/", help="the input csv of a graph to be analyzed")
+	parser.add_argument("--output-folder", default="/", help="the where to save results")
 	args = parser.parse_args()
 	input_file = args.input_file
+	output_folder = args.output_folder
 
 # read data into a cuDF DataFrame using read_csv
 print("reading csv")
@@ -27,19 +29,31 @@ print("Graph created")
 # Centrality scores
 print("evaluating centrality scores")
 df_page = cugraph.pagerank(G)
+df_page.to_csv(output_folder + "/pagerank.csv")
 print("pagerank done")
-#vertex_bc = cugraph.betweenness_centrality(G)
-#print("BC done")
-#edge_bc = cugraph.edge_betweenness_centrality(G)
+
+vertex_bc = cugraph.betweenness_centrality(G)
+vertex_bc.to_csv(output_folder + "/vertex_bc.csv")
+print("BC done")
+
+edge_bc = cugraph.edge_betweenness_centrality(G)
+edge_bc.to_csv(output_folder + "/edge_bc.csv")
 print("EDGE BC done")
 
-# Communities
-#gdf["data"] = 1.0
-#G = cugraph.Graph()
-#G.from_cudf_edgelist(gdf, source='src', destination='dst', edge_attr='data', renumber=True)
-#df_louv, mod_louv = cugraph.louvain(G)
-#df_ecg = cugraph.ecg(G)
+#Communities
+gdf["data"] = 1.0
+G = cugraph.Graph()
+G.from_cudf_edgelist(gdf, source='src', destination='dst', edge_attr='data', renumber=True)
+df_louv, mod_louv = cugraph.louvain(G)
+df_louv.to_csv(output_folder + "/df_louv.csv")
+mod_louv.to_csv(output_folder + "/mod_louv.csv")
+print("Louvain done")
 
+df_ecg = cugraph.ecg(G)
+df_ecg.to_csv(output_folder + "/df_ecg.csv")
+print("ECG done");
+
+print("sanity check: printing the first 5 pagerank score")
 for i in range(5):
 	print("vertex " + str(df_page['vertex'].iloc[i]) +
 		" PageRank is " + str(df_page['pagerank'].iloc[i]))
