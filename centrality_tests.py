@@ -1,7 +1,10 @@
 import cugraph
 import cudf as cudf
+from dask.distributed import Client
 import argparse
 
+schedulerjson = "/home/clusterusers/pasyloslabini/dask-local-directory/dask-scheduler.json"
+client = Client(scheduler_file=schedulerjson)
 
 if __name__ == "__main__":
 	parser = argparse.ArgumentParser(description="Collect results for approximate algorithms into a csv")
