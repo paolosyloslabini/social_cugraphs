@@ -12,4 +12,5 @@ CONDA_ROOT=$(conda info --base)
 source $CONDA_ROOT/etc/profile.d/conda.sh
 conda activate rapids-21.06
 
+python3 /home/clusterusers/pasyloslabini/social_cugraphs/centrality_tests.py --input-file /home/clusterusers/pasyloslabini/social_cugraphs/YT_edgelist_relabeled.csv
 python3 /home/clusterusers/pasyloslabini/social_cugraphs/centrality_tests.py --input-file /home/clusterusers/pasyloslabini/social_cugraphs/YT_BIG_relabeled.csv
