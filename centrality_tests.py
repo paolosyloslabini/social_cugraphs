@@ -46,7 +46,6 @@ G = cugraph.Graph()
 G.from_cudf_edgelist(gdf, source='src', destination='dst', edge_attr='data', renumber=True)
 df_louv, mod_louv = cugraph.louvain(G)
 df_louv.to_csv(output_folder + "/df_louv.csv")
-mod_louv.to_csv(output_folder + "/mod_louv.csv")
 print("Louvain done")
 
 df_ecg = cugraph.ecg(G)
