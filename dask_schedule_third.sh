@@ -12,4 +12,4 @@ CONDA_ROOT=$(conda info --base)
 source $CONDA_ROOT/etc/profile.d/conda.sh
 conda activate rapids-21.06
 
-python3 /home/clusterusers/pasyloslabini/social_cugraphs/test_cudf.py 
+python3 /home/clusterusers/pasyloslabini/dask-local-directory/dask-cudf-example.py 
