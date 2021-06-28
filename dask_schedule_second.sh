@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #SBATCH -J dask-cuda-workers
-#SBATCH -t 00:10:00
+#SBATCH -t 10:00:00
 #SBATCH --job-name=dask_schedule_start
 #SBATCH --error=workers-%j.err
 #SBATCH --output=workers-%j.out
@@ -16,6 +16,6 @@ conda activate rapids-21.06
 LOCAL_DIRECTORY=/home/clusterusers/pasyloslabini/dask-local-directory
 
 dask-cuda-worker \
-	    --rmm-pool-size 1GB \
+	    --rmm-pool-size 32GB \
 	        --scheduler-file "$LOCAL_DIRECTORY/dask-scheduler.json"
 

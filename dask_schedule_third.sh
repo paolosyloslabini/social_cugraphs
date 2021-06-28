@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #SBATCH -J dask-client
-#SBATCH -t 00:10:00
+#SBATCH -t 10:00:00
 #SBATCH --error=client-%j.err
 #SBATCH --output=client-%j.out
 #SBATCH --partition gpu
@@ -12,4 +12,4 @@ CONDA_ROOT=$(conda info --base)
 source $CONDA_ROOT/etc/profile.d/conda.sh
 conda activate rapids-21.06
 
-python3 /home/clusterusers/pasyloslabini/social_cugraphs/centrality_tests.py 
+python3 /home/clusterusers/pasyloslabini/social_cugraphs/centrality_tests.py --input-file /home/clusterusers/pasyloslabini/social_cugraphs/YT_BIG_relabeled.csv

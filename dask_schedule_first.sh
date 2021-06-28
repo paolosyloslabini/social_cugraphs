@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 #SBATCH -J dask-scheduler
 #SBATCH --partition gpu
-#SBATCH --nodes 1
+#SBATCH --nodes 2
 #SBATCH --ntasks=1
-#SBATCH -t 00:30:00
+#SBATCH -t 10:00:00
 #SBATCH --error=scheduler-%j.err
 #SBATCH --output=scheduler-%j.out
 module load cuda-11.0
