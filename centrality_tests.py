@@ -27,18 +27,14 @@ G.from_cudf_edgelist(gdf, source='src', destination='dst')
 print("Graph created")
 
 # Centrality scores
-print("evaluating centrality scores")
-df_page = cugraph.pagerank(G)
-df_page.to_csv(output_folder + "/pagerank.csv")
-print("pagerank done")
+#print("evaluating centrality scores")
+#df_page = cugraph.pagerank(G)
+#df_page.to_csv(output_folder + "/pagerank.csv")
+#print("pagerank done")
 
-vertex_bc = cugraph.betweenness_centrality(G)
-vertex_bc.to_csv(output_folder + "/vertex_bc.csv")
-print("BC done")
-
-edge_bc = cugraph.edge_betweenness_centrality(G)
-edge_bc.to_csv(output_folder + "/edge_bc.csv")
-print("EDGE BC done")
+#vertex_bc = cugraph.betweenness_centrality(G)
+#vertex_bc.to_csv(output_folder + "/vertex_bc.csv")
+#print("BC done")
 
 #Communities
 gdf["data"] = 1.0
