@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #SBATCH -J dask-cuda-workers
-#SBATCH -t 10:00:00
+#SBATCH -t 48:00:00
 #SBATCH --job-name=dask_schedule_start
 #SBATCH --error=workers-%j.err
 #SBATCH --output=workers-%j.out
