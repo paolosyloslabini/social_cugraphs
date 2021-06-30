@@ -37,9 +37,9 @@ print("Graph created")
 #print("BC done")
 
 #Communities
-gdf["data"] = 1.0
+gdf["data"] = 1
 G = cugraph.Graph()
-G.from_cudf_edgelist(gdf, source='src', destination='dst', edge_attr='data', renumber=True)
+G.from_cudf_edgelist(gdf, source='src', destination='dst', edge_attr='data')
 df_louv, mod_louv = cugraph.louvain(G)
 df_louv.to_csv(output_folder + "/df_louv.csv")
 print("Louvain done")
