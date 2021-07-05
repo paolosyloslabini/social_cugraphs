@@ -5,7 +5,7 @@
 #SBATCH --output=client-%j.out
 #SBATCH --partition gpu
 #SBATCH --gres=gpu
-#SBATCH --nodes 2
+#SBATCH --nodes 1
 module load cuda-11.0
 module load anaconda3
 CONDA_ROOT=$(conda info --base)
