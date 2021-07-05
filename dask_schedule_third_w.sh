@@ -12,4 +12,4 @@ CONDA_ROOT=$(conda info --base)
 source $CONDA_ROOT/etc/profile.d/conda.sh
 conda activate rapids-21.06
 
-python3 /home/clusterusers/pasyloslabini/social_cugraphs/analyse_weighted_graph.py --input-file /home/clusterusers/pasyloslabini/social_cugraphs/graphs/viterbo_muPOLYMOD_EP1_t500_all.ncol --output-folder /home/clusterusers/pasyloslabini/social_cugraphs/covid_graph
+python3 /home/clusterusers/pasyloslabini/social_cugraphs/analyse_weighted_graph.py --input-file /home/clusterusers/pasyloslabini/social_cugraphs/graphs/viterbo_muPOLYMOD_EP1_t500_all.ncol --output-folder /home/clusterusers/pasyloslabini/social_cugraphs/covid_graph/
