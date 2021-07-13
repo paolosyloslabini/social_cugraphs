@@ -23,16 +23,9 @@ if __name__ == "__main__":
 
 # read data into a cuDF DataFrame using read_csv
 print("reading csv")
-gdf = cudf.read_csv(input_file, names=["src", "dst", "w"], dtype=["int32", "int32", "float32"])
+gdf = cudf.read_csv(input_file, names=["src", "dst", "w"], dtype=["int32", "int32", "int32"])
 
-def remove_greater(w_in, w_dist, t = MAX_INT):
-	for i, w in enumerate(w_in):
-		if (w >= t):
-			w_dist[i] = MAX_INT;
-		else:
-			w_dist[i] = w;
-	
-gdf.apply_rows(remove_greater, incols = {"w":"w_in"}, outcols = {'w_dist': np.float32 }, kwargs={"t":thres});
+gdf.loc[gdf['w'] > thres, 'w'] = MAX_INT
 
 def invert_weight(w_in, w_inverted):
 	for i, w in enumerate(w_in):
@@ -41,7 +34,8 @@ def invert_weight(w_in, w_inverted):
 		else:
 			w_inverted[i] = 1/w;
 	
-gdf.apply_rows(invert_weight, incols = {"w_dist":"w_in"}, outcols = {'w_inverted': np.float32 }, kwargs={});
+gdf.apply_rows(invert_weight, incols = {'w':"w_in"}, outcols = {'w_inverted': np.float32 }, kwargs={});
+
 print("csv read")
 
 # We now have data as edge pairs
