@@ -23,7 +23,7 @@ if __name__ == "__main__":
 
 # read data into a cuDF DataFrame using read_csv
 print("reading csv")
-gdf = cudf.read_csv(input_file, delimiter = " ", names=["src", "dst", "w"], dtype=["int32", "int32", "int32"])
+gdf = cudf.read_csv(input_file, delimiter = " ", names=["src", "dst", "w"], dtype=["int32", "int32", "float64"])
 
 if(thres > 0):
 	gdf.loc[gdf['w'] > thres, 'w'] = MAX_INT
