@@ -31,7 +31,7 @@ def remove_greater(w_in, out, t = MAX_INT):
 		else:
 			out[i] = w;
 	
-gdf.applyrow(remove_greater, incols = {"w":"w_in"}, outcols = {'w': np.float32 }, kwargs={"t":thres});
+gdf.apply_rows(remove_greater, incols = {"w":"w_in"}, outcols = {'w': np.float32 }, kwargs={"t":thres});
 
 def invert_weight(w_in, out):
 	for i, w in enumerate(w_in):
@@ -40,7 +40,7 @@ def invert_weight(w_in, out):
 		else:
 			out[i] = 1/w;
 	
-gdf.applyrow(invert_weight, incols = {"w":"w_in"}, outcols = {'w': np.float32 });
+gdf.apply_rows(invert_weight, incols = {"w":"w_in"}, outcols = {'w': np.float32 });
 print("csv read")
 
 # We now have data as edge pairs
