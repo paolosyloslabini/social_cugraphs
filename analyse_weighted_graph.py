@@ -26,6 +26,14 @@ if(thres > 0):
 	mask = gdf["w"] < thres
 	gdf = gdf[mask]
 
+def remove_greather_than(w):
+	if (w > threshold):
+		return 1000000
+	else: 
+		return w;
+	
+gdf["w"].applymap(remove_greather_than);
+	
 def invert_weight(w):
 	if (w == 0):
 		return 0;
