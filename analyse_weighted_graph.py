@@ -32,7 +32,7 @@ def remove_greater(w_in, out, t = MAX_INT):
 		else:
 			out[i] = w;
 	
-gdf.apply_rows(remove_greater, incols = {"w":"w_in"}, outcols = {'w': np.float32 }, kwargs={"t":thres});
+gdf.apply_rows(remove_greater, incols = {"w":"w_in"}, outcols = {'out': np.float32 }, kwargs={"t":thres});
 
 def invert_weight(w_in, out):
 	for i, w in enumerate(w_in):
