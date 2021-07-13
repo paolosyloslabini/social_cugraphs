@@ -39,7 +39,10 @@ print("csv read")
 # create a Graph using the source (src) and destination (dst) vertex pairs
 print("Making unweighted graph")
 G = cugraph.Graph()
-G.from_cudf_edgelist(gdf[gdf['w'] > 1.0/thres], source='src', destination='dst')
+if (thres > 0):
+	G.from_cudf_edgelist(gdf[gdf['w'] > 1.0/thres], source='src', destination='dst')
+else:
+	G.from_cudf_edgelist(gdf, source='src', destination='dst')
 print("unweighted graph created")
 
 # Centrality scores
@@ -54,8 +57,11 @@ print("BC done")
 
 #weighted
 G = cugraph.Graph()
-G.from_cudf_edgelist(gdf[gdf['w'] > 1.0/thres], source='src', destination='dst', edge_attr='w')
-
+if(thres > 0):
+	G.from_cudf_edgelist(gdf[gdf['w'] > 1.0/thres], source='src', destination='dst', edge_attr='w')
+else:
+	G.from_cudf_edgelist(gdf, source='src', destination='dst', edge_attr='w')
+	
 print("evaluating centrality scores")
 df_page = cugraph.pagerank(G)
 df_page.to_csv(output_folder + "/" + name + "_w_pagerank.csv")
