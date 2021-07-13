@@ -56,7 +56,7 @@ print("BC done")
 
 #weighted
 G = cugraph.Graph()
-G.from_cudf_edgelist(gdf, source='src', destination='dst', edge_attr='w_inverted')
+G.from_cudf_edgelist(gdf, source='src', destination='dst', edge_attr='w')
 
 print("evaluating centrality scores")
 df_page = cugraph.pagerank(G)
