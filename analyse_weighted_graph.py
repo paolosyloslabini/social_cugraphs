@@ -32,7 +32,7 @@ def invert_weight(w):
 	if (w < 1/MAX_WEIGHT):
 		return MAX_WEIGHT;
 	else:
-		return 1/w;
+		return 1.0/w;
 	
 gdf['w'].applymap(invert_weight);
 
