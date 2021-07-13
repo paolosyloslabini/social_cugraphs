@@ -42,7 +42,7 @@ print("csv read")
 # create a Graph using the source (src) and destination (dst) vertex pairs
 print("Making unweighted graph")
 G = cugraph.Graph()
-G.from_cudf_edgelist(gdf, source='src', destination='dst')
+G.from_cudf_edgelist(gdf[gdf['w' > 1.0/MAX_WEIGHT]], source='src', destination='dst')
 print("unweighted graph created")
 
 # Centrality scores
