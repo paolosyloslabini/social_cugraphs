@@ -8,7 +8,7 @@ schedulerjson = "/home/clusterusers/pasyloslabini/dask-local-directory/dask-sche
 client = Client(scheduler_file=schedulerjson)
 
 
-MAX_INT = 1000000
+MAX_WEIGHT = 100000f
 if __name__ == "__main__":
 	parser = argparse.ArgumentParser(description="Collect results for approximate algorithms into a csv")
 	parser.add_argument("--input-file", default="/", help="the input csv of a graph to be analyzed")
@@ -23,18 +23,18 @@ if __name__ == "__main__":
 
 # read data into a cuDF DataFrame using read_csv
 print("reading csv")
-gdf = cudf.read_csv(input_file, delimiter = " ", names=["src", "dst", "w"], dtype=["int32", "int32", "float64"])
+gdf = cudf.read_csv(input_file, delimiter = " ", names=["src", "dst", "w"], dtype=["int32", "int32", "float32"])
 
 if(thres > 0):
-	gdf.loc[gdf['w'] > thres, 'w'] = MAX_INT
+	gdf.loc[gdf['w'] > thres, 'w'] = MAX_WEIGHT
 
 def invert_weight(w):
-	if (w < 1/MAX_INT):
-		return MAX_INT;
+	if (w < 1/MAX_WEIGHT):
+		return MAX_WEIGHT;
 	else:
 		return 1/w;
 	
-gdf["w"].applymap(invert_weight);
+gdf['w'].applymap(invert_weight);
 
 print("csv read")
 
