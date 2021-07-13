@@ -16,7 +16,7 @@ if __name__ == "__main__":
 	input_file = args.input_file
 	output_folder = args.output_folder
 	name = args.name
-	thres = args.threshold
+	thres = int(args.threshold)
 
 # read data into a cuDF DataFrame using read_csv
 print("reading csv")
