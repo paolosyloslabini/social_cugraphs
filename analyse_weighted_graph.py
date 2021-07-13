@@ -25,23 +25,23 @@ if __name__ == "__main__":
 print("reading csv")
 gdf = cudf.read_csv(input_file, names=["src", "dst", "w"], dtype=["int32", "int32", "float32"])
 
-def remove_greater(w_in, out, t = MAX_INT):
+def remove_greater(w_in, w_dist, t = MAX_INT):
 	for i, w in enumerate(w_in):
 		if (w >= t):
-			out[i] = MAX_INT;
+			w_dist[i] = MAX_INT;
 		else:
-			out[i] = w;
+			w_dist[i] = w;
 	
-gdf.apply_rows(remove_greater, incols = {"w":"w_in"}, outcols = {'out': np.float32 }, kwargs={"t":thres});
+gdf.apply_rows(remove_greater, incols = {"w":"w_in"}, outcols = {'w_dist': np.float32 }, kwargs={"t":thres});
 
-def invert_weight(w_in, out):
+def invert_weight(w_in, w_inverted):
 	for i, w in enumerate(w_in):
 		if (w == 0):
-			out[i] = MAX_INT;
+			w_inverted[i] = MAX_INT;
 		else:
-			out[i] = 1/w;
+			w_inverted[i] = 1/w;
 	
-gdf.apply_rows(invert_weight, incols = {"w":"w_in"}, outcols = {'w': np.float32 });
+gdf.apply_rows(invert_weight, incols = {"w_dist":"w_in"}, outcols = {'w_inverted': np.float32 }, kwargs={});
 print("csv read")
 
 # We now have data as edge pairs
@@ -63,7 +63,7 @@ print("BC done")
 
 #weighted
 G = cugraph.Graph()
-G.from_cudf_edgelist(gdf, source='src', destination='dst', edge_attr='w')
+G.from_cudf_edgelist(gdf, source='src', destination='dst', edge_attr='w_inverted')
 
 print("evaluating centrality scores")
 df_page = cugraph.pagerank(G)
