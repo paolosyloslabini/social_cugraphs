@@ -25,7 +25,8 @@ if __name__ == "__main__":
 print("reading csv")
 gdf = cudf.read_csv(input_file, delimiter = " ", names=["src", "dst", "w"], dtype=["int32", "int32", "int32"])
 
-gdf.loc[gdf['w'] > thres, 'w'] = MAX_INT
+if(thres > 0):
+	gdf.loc[gdf['w'] > thres, 'w'] = MAX_INT
 
 def invert_weight(w):
 	if (w < 1/MAX_INT):
