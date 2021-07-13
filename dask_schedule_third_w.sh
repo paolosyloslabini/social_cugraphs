@@ -12,4 +12,6 @@ CONDA_ROOT=$(conda info --base)
 source $CONDA_ROOT/etc/profile.d/conda.sh
 conda activate rapids-21.06
 
-python3 /home/clusterusers/pasyloslabini/social_cugraphs/analyse_weighted_graph.py --input-file ${1} --output-folder ${2}
+python3 /home/clusterusers/pasyloslabini/social_cugraphs/analyse_weighted_graph.py --input-file ${1} --output-folder ${2} --threshold 1500 --name g_1500
+python3 /home/clusterusers/pasyloslabini/social_cugraphs/analyse_weighted_graph.py --input-file ${1} --output-folder ${2} --threshold 1000 --name g_1000
+python3 /home/clusterusers/pasyloslabini/social_cugraphs/analyse_weighted_graph.py --input-file ${1} --output-folder ${2} --threshold 500 --name g_500
