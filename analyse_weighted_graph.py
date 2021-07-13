@@ -31,7 +31,7 @@ def invert_weight(w):
 	if (w < 1/MAX_INT):
 		w = MAX_INT;
 	else:
-		w_inverted[i] = 1/w;
+		w = 1/w;
 	
 gdf["w"].applymap(invert_weight);
 
