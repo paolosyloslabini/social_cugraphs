@@ -6,6 +6,8 @@ import argparse
 schedulerjson = "/home/clusterusers/pasyloslabini/dask-local-directory/dask-scheduler.json"
 client = Client(scheduler_file=schedulerjson)
 
+
+MAX_INT = 1000000
 if __name__ == "__main__":
 	parser = argparse.ArgumentParser(description="Collect results for approximate algorithms into a csv")
 	parser.add_argument("--input-file", default="/", help="the input csv of a graph to be analyzed")
@@ -22,24 +24,23 @@ if __name__ == "__main__":
 print("reading csv")
 gdf = cudf.read_csv(input_file, names=["src", "dst", "w"], dtype=["int32", "int32", "float32"])
 
-if(thres > 0):
-	mask = gdf["w"] < thres
-	gdf = gdf[mask]
+def remove_greater(w_in, out, t = MAX_INT):
+	for i, w in enumerate(w_in):
+		if (w >= t):
+			out[i] = MAX_INT;
+		else:
+			out[i] = w;
+	
+gdf.applyrow(remove_greater, incols = {"w":"w_in"}, outcols = {'w': np.float32 }, kwargs={"t":thres});
 
-def remove_greather_than(w):
-	if (w > threshold):
-		return 1000000
-	else: 
-		return w;
+def invert_weight(w_in, out):
+	for i, w in enumerate(w_in):
+		if (w == 0):
+			out[i] = MAX_INT;
+		else:
+			out[i] = 1/w;
 	
-gdf["w"].applymap(remove_greather_than);
-	
-def invert_weight(w):
-	if (w == 0):
-		return 0;
-	else:
-		return 1/w;
-gdf["w"].applymap(invert_weight);
+gdf.applyrow(invert_weight, incols = {"w":"w_in"}, outcols = {'w': np.float32 });
 print("csv read")
 
 # We now have data as edge pairs
