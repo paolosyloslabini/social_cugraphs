@@ -8,7 +8,7 @@ schedulerjson = "/home/clusterusers/pasyloslabini/dask-local-directory/dask-sche
 client = Client(scheduler_file=schedulerjson)
 
 
-MAX_WEIGHT = 100000f
+MAX_WEIGHT = 100000.0
 if __name__ == "__main__":
 	parser = argparse.ArgumentParser(description="Collect results for approximate algorithms into a csv")
 	parser.add_argument("--input-file", default="/", help="the input csv of a graph to be analyzed")
