@@ -27,14 +27,13 @@ gdf = cudf.read_csv(input_file, delimiter = " ", names=["src", "dst", "w"], dtyp
 
 gdf.loc[gdf['w'] > thres, 'w'] = MAX_INT
 
-def invert_weight(w_in, w_inverted):
-	for i, w in enumerate(w_in):
-		if (w == 0):
-			w_inverted[i] = MAX_INT;
-		else:
-			w_inverted[i] = 1/w;
+def invert_weight(w):
+	if (w < 1/MAX_INT):
+		w = MAX_INT;
+	else:
+		w_inverted[i] = 1/w;
 	
-gdf.apply_rows(invert_weight, incols = {'w':"w_in"}, outcols = {'w_inverted': np.float32 }, kwargs={});
+gdf["w"].applymap(invert_weight);
 
 print("csv read")
 
