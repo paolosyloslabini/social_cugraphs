@@ -11,14 +11,20 @@ if __name__ == "__main__":
 	parser.add_argument("--input-file", default="/", help="the input csv of a graph to be analyzed")
 	parser.add_argument("--output-folder", default="/", help="where to save results")
 	parser.add_argument("--name", default="g_", help="name of the graph")
+	parser.add_argument("--threshold", default=-1, help="threshold for weights")
 	args = parser.parse_args()
 	input_file = args.input_file
 	output_folder = args.output_folder
 	name = args.name
+	thres = args.threshold
 
 # read data into a cuDF DataFrame using read_csv
 print("reading csv")
 gdf = cudf.read_csv(input_file, names=["src", "dst", "w"], dtype=["int32", "int32", "float32"])
+
+if(thres > 0):
+	mask = gdf["w"] < thres
+	gdf = gdf[mask]
 
 def invert_weight(w):
 	if (w == 0):
