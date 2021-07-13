@@ -30,9 +30,9 @@ if(thres > 0):
 
 def invert_weight(w):
 	if (w < 1/MAX_INT):
-		w = MAX_INT;
+		return MAX_INT;
 	else:
-		w = 1/w;
+		return 1/w;
 	
 gdf["w"].applymap(invert_weight);
 
