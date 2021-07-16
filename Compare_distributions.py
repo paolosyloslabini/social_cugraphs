@@ -16,7 +16,7 @@ if __name__ == "__main__":
 df = pd.read_csv(input_file, sep = " ", header = None, names = ["node","value"])
           
   
-values, base = np.histogram(df["values"], bins=40)
+values, base = np.histogram(df["value"], bins=40)
 cumulative = np.cumsum(values)
 plt.plot(base[:-1], cumulative, c='blue')
 #plt.legend(bbox_to_anchor=(0.5, 1.00), shadow=True, ncol=4, fontsize=15)
