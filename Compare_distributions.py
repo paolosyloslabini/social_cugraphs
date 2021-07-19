@@ -17,7 +17,7 @@ if __name__ == "__main__":
         
 for file in glob.glob(input_folder + "*.csv"):
         
-        prop_name = name + "_" + file.split('.')[0]
+        prop_name = name + "_" + (file.split('.')[0]).split("/")[-1]
         
         try:
                 df = pd.read_csv(file, header = 0, names = ["index","value", "node"]) 
