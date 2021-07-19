@@ -13,8 +13,7 @@ if __name__ == "__main__":
         output_folder = args.output_folder
         name = args.name
 
-df = pd.read_csv(input_file, sep = " ", header = None, names = ["node","value"])
-          
+df = pd.read_csv(input_file, sep = " ", header = 0, names = ["index","value", "node"], index = None) 
   
 sorted_data = np.sort(df["value"].tolist())
 
