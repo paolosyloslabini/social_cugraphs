@@ -25,11 +25,11 @@ for file in glob.glob(input_folder + "*.csv"):
                 df = pd.read_csv(file, sep = " ", header = 0, names = ["node", "value"])
                 
         sorted_data = np.sort(df["value"].tolist())
-        
         # Cumulative counts:
         plt.step(sorted_data, np.arange(sorted_data.size))  # From 0 to the number of data points-1
 
         #plt.legend(bbox_to_anchor=(0.5, 1.00), shadow=True, ncol=4, fontsize=15)
         plt.title(prop_name);   
-        plt.savefig(prop_name + ".jpg", format = 'jpg', dpi=300, bbox_inches = "tight")
+        plt.savefig(output_folder + prop_name + ".jpg", format = 'jpg', dpi=300, bbox_inches = "tight")
+        plt.clf()
 
