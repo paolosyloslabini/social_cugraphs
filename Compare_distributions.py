@@ -2,7 +2,7 @@ import argparse
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-import import glob
+import glob
 
 if __name__ == "__main__":
         parser = argparse.ArgumentParser(description="Makes images of the distributions")
