@@ -19,7 +19,6 @@ sorted_data = np.sort(df["value"].tolist())
 
 # Cumulative counts:
 plt.step(sorted_data, np.arange(sorted_data.size))  # From 0 to the number of data points-1
-plt.step(sorted_data[::-1], np.arange(sorted_data.size))  # From the number of data points-1 to 0
 
 #plt.legend(bbox_to_anchor=(0.5, 1.00), shadow=True, ncol=4, fontsize=15)
 plt.title(name);   
