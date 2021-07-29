@@ -48,15 +48,19 @@ print("unweighted graph created")
 if (G.has_isolated_vertices()):
     print("G has isolated vertices");
 
+
+def save_df(df, savename):
+	df.sort_values(by = 'vertex');
+	df.to_csv(output_folder + "/" + name + savename + ".csv", header = False, index = False, columns = [1,0])
+	print(savename + " done");
+
 # Centrality scores
 print("evaluating centrality scores")
 df_page = cugraph.pagerank(G)
-df_page.to_csv(output_folder + "/" + name + "pagerank.csv",header = False, index = False)
-print("pagerank done")
+save_df(df_page, "pagerank");
 
 vertex_bc = cugraph.betweenness_centrality(G)
-vertex_bc.to_csv(output_folder + "/" + name + "vertex_bc.csv",header = False, index = False)
-print("BC done")
+save_df(vertex_bc, "betweenness");
 
 #weighted
 G = cugraph.Graph()
@@ -67,21 +71,16 @@ else:
 	
 print("evaluating centrality scores")
 df_page = cugraph.pagerank(G)
-df_page.to_csv(output_folder + "/" + name + "_w_pagerank.csv", header = False, index = False)
-print("pagerank done")
+save_df(df_page, "_w_pagerank")
 
 vertex_bc = cugraph.betweenness_centrality(G)
-vertex_bc.to_csv(output_folder + "/" + name + "_w_vertex_bc.csv", header = False, index = False)
-print("BC done")
-
+save_df(vertex_bc, "_w_betweenness")
 
 df_louv, mod_louv = cugraph.louvain(G)
-df_louv.to_csv(output_folder + "/" + name + "_w_df_louv.csv",header = False, index = False)
-print("Louvain done")
+save_df(df_louv, "_w_louvain")
 
 df_ecg = cugraph.ecg(G)
-df_ecg.to_csv(output_folder + "/" + name + "_w_df_ecg.csv",header = False, index = False)
-print("ECG done");
+save_df(df_ecg, "_w_ecg")
 
 print("sanity check: printing the first 5 pagerank score")
 for i in range(5):
