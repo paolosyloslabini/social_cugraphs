@@ -40,44 +40,47 @@ print("csv read")
 print("Making unweighted graph")
 G = cugraph.Graph()
 if (thres > 0):
-	G.from_cudf_edgelist(gdf[gdf['w'] > 1.0/thres], source='src', destination='dst')
+	G.from_cudf_edgelist(gdf[gdf['w'] > 1.0/thres], source='src', destination='dst', renumber = False)
 else:
-	G.from_cudf_edgelist(gdf, source='src', destination='dst')
+	G.from_cudf_edgelist(gdf, source='src', destination='dst', renumber = False)
 print("unweighted graph created")
+
+if (G.has_isolated_vertices()):
+    print("G has isolated vertices");
 
 # Centrality scores
 print("evaluating centrality scores")
 df_page = cugraph.pagerank(G)
-df_page.to_csv(output_folder + "/" + name + "pagerank.csv")
+df_page.to_csv(output_folder + "/" + name + "pagerank.csv",header = False, index = False)
 print("pagerank done")
 
 vertex_bc = cugraph.betweenness_centrality(G)
-vertex_bc.to_csv(output_folder + "/" + name + "vertex_bc.csv")
+vertex_bc.to_csv(output_folder + "/" + name + "vertex_bc.csv",header = False, index = False)
 print("BC done")
 
 #weighted
 G = cugraph.Graph()
 if(thres > 0):
-	G.from_cudf_edgelist(gdf[gdf['w'] > 1.0/thres], source='src', destination='dst', edge_attr='w')
+	G.from_cudf_edgelist(gdf[gdf['w'] > 1.0/thres], source='src', destination='dst', edge_attr='w', renumber = False)
 else:
-	G.from_cudf_edgelist(gdf, source='src', destination='dst', edge_attr='w')
+	G.from_cudf_edgelist(gdf, source='src', destination='dst', edge_attr='w', renumber = False)
 	
 print("evaluating centrality scores")
 df_page = cugraph.pagerank(G)
-df_page.to_csv(output_folder + "/" + name + "_w_pagerank.csv")
+df_page.to_csv(output_folder + "/" + name + "_w_pagerank.csv", header = False, index = False)
 print("pagerank done")
 
 vertex_bc = cugraph.betweenness_centrality(G)
-vertex_bc.to_csv(output_folder + "/" + name + "_w_vertex_bc.csv")
+vertex_bc.to_csv(output_folder + "/" + name + "_w_vertex_bc.csv", header = False, index = False)
 print("BC done")
 
 
 df_louv, mod_louv = cugraph.louvain(G)
-df_louv.to_csv(output_folder + "/" + name + "_w_df_louv.csv")
+df_louv.to_csv(output_folder + "/" + name + "_w_df_louv.csv",header = False, index = False)
 print("Louvain done")
 
 df_ecg = cugraph.ecg(G)
-df_ecg.to_csv(output_folder + "/" + name + "_w_df_ecg.csv")
+df_ecg.to_csv(output_folder + "/" + name + "_w_df_ecg.csv",header = False, index = False)
 print("ECG done");
 
 print("sanity check: printing the first 5 pagerank score")
